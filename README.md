@@ -1,4 +1,4 @@
-# Audit GitHub Repo
+# Audit GitHub Org
 
 ## Introduction
 
