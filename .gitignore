@@ -1,0 +1,11 @@
+repos/
+config
+
+2-authors.txt
+my-repos.txt
+
+src/1-repo-list.txt
+src/1.1-clone.sh
+src/1.1-pull.sh
+
+.DS_Store

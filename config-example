@@ -1,0 +1,14 @@
+#! /bin/bash
+
+# Required configs (set-up)
+BEARER_TOKEN=abc123
+GITHUB_ORG=MYORG
+
+# Required configs (audit scope)
+DATE_FILTER="14 days ago"
+APPROVAL_FILTER="@myorg.com$|@users.noreply.github.com"
+
+# Optional configs
+# REPO_FILTER=archived
+# SKIP_GET=False
+# REPO_LIST=my-repos.txt
