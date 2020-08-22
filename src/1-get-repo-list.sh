@@ -41,7 +41,7 @@ cat temp/content.* | jq '.[].ssh_url' -r | sort | uniq | egrep -v "$REPO_FILTER"
 echo "popd" >> src/1.1-clone.sh
 
 echo "pushd repos" > src/1.1-pull.sh
-cat temp/content.* | jq '.[].ssh_url' -r | sort | uniq | egrep -v "$REPO_FILTER" | cut -d'/' -f2 | cut -d'.' -f1 | awk '{print "pushd "$1"; git pull; popd"}' >> src/1.1-pull.sh
+cat temp/content.* | jq '.[].ssh_url' -r | sort | uniq | egrep -v "$REPO_FILTER" | cut -d'/' -f2 | sed 's/.git//g' | awk '{print "pushd "$1"; git pull; popd"}' >> src/1.1-pull.sh
 echo "popd" >> src/1.1-pull.sh
 
 rm -rf temp
