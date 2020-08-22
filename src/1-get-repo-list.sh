@@ -20,6 +20,8 @@ echo "GitHub API: Getting number of pages"
 wget --header "Authorization: Bearer $BEARER_TOKEN"\
  --save-headers "https://api.github.com/orgs/$GITHUB_ORG/repos?page=$PAGE_NUMBER"\
   -O temp/out.txt 2>/dev/null
+[ $? -ne 0 ] && echo "Error: GitHub credentials invalid" && exit 1
+
 sed -i -e "s/^M//" temp/out.txt
 TOTAL_PAGES=$(cat temp/out.txt | grep ^Link: | awk -F'?' '{print $NF}' | cut -d'>' -f1 | cut -d'=' -f2)
 

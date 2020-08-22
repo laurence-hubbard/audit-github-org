@@ -15,8 +15,11 @@ if [ $? -ne 0 ]; then
 fi
 
 if ! $SKIP_GET; then
+    mkdir -p repos
     ./src/1-get-repo-list.sh "$BEARER_TOKEN" "$GITHUB_ORG" "$REPO_FILTER"
     [ $? -ne 0 ] && exit 1
+
+    chmod 744 ./src/*.sh
 
     ./src/1.1-clone.sh
     ./src/1.1-pull.sh
