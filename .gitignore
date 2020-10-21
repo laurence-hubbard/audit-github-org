@@ -1,11 +1,10 @@
 repos/
 config
 
-2-authors.txt
-my-repos.txt
+*.txt
 
-src/1-repo-list.txt
 src/1.1-clone.sh
 src/1.1-pull.sh
+src/truffle-results/
 
 .DS_Store

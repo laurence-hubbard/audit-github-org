@@ -11,4 +11,5 @@ APPROVAL_FILTER="@myorg.com$|@users.noreply.github.com"
 # Optional configs
 # REPO_FILTER=archived
 # SKIP_GET=False
+# SKIP_TRUFFLE=True
 # REPO_LIST=my-repos.txt

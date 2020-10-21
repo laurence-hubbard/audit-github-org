@@ -36,3 +36,5 @@ fi
 
 ./src/3-update-repos-track-authors.sh "$DATE_FILTER"
 ./src/4-get-unapproved-authors.sh "$APPROVAL_FILTER"
+
+./src/5-truffling.sh "$SKIP_TRUFFLE" "$GITHUB_ORG"
