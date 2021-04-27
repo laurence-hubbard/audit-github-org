@@ -1,10 +1,11 @@
 repos/
+old-repos/
 config
 
 *.txt
 
 src/1.1-clone.sh
 src/1.1-pull.sh
-src/truffle-results/
+src/results/
 
 .DS_Store

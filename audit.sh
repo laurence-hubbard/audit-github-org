@@ -16,7 +16,7 @@ fi
 
 if ! $SKIP_GET; then
     mkdir -p repos
-    ./src/1-get-repo-list.sh "$BEARER_TOKEN" "$GITHUB_ORG" "$REPO_FILTER"
+    ./src/1-get-repo-list.sh "$BEARER_TOKEN" "$GITHUB_ORG" "$REPO_FILTER" "${REPO_LIST}"
     [ $? -ne 0 ] && exit 1
 
     chmod 744 ./src/*.sh
@@ -38,3 +38,5 @@ fi
 ./src/4-get-unapproved-authors.sh "$APPROVAL_FILTER"
 
 ./src/5-truffling.sh "$SKIP_TRUFFLE" "$GITHUB_ORG"
+
+./src/6-post-truffle.sh "$SKIP_TRUFFLE" "$SKIP_POST_TRUFFLE" "$BEARER_TOKEN"

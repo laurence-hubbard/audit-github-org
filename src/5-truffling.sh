@@ -14,7 +14,8 @@ if ! $SKIP_TRUFFLE; then
         REPO=$(echo $REPO_SSH | cut -d'/' -f2 | sed 's/.git$//g')
         pushd repos/$REPO > /dev/null
 
-            truffleHog --regex --entropy=False ./ | sed -r "s/[[:cntrl:]]\[[0-9]{1,3}m//g" | egrep -i "^Reason:|^Filepath:|^Branch:|~~~~~~~~~~~~~~~~~~~~~|^Hash:" > ../../src/truffle-results/$REPO.txt
+            docker run --rm -v "$(pwd):/proj" dxa4481/trufflehog --regex --entropy=False file:///proj | sed -r "s/[[:cntrl:]]\[[0-9]{1,3}m//g" | egrep -i "^Reason:|^Filepath:|^Branch:|~~~~~~~~~~~~~~~~~~~~~|^Hash:" > ../../src/truffle-results/$REPO.txt
+            # truffleHog --regex --entropy=False ./ | sed -r "s/[[:cntrl:]]\[[0-9]{1,3}m//g" | egrep -i "^Reason:|^Filepath:|^Branch:|~~~~~~~~~~~~~~~~~~~~~|^Hash:" > ../../src/truffle-results/$REPO.txt
             RESULTS=$(cat ../../src/truffle-results/$REPO.txt | grep -c "^Reason:")
         popd > /dev/null
 
