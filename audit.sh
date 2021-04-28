@@ -39,4 +39,4 @@ fi
 
 ./src/5-truffling.sh "$SKIP_TRUFFLE" "$GITHUB_ORG"
 
-./src/6-post-truffle.sh "$SKIP_TRUFFLE" "$SKIP_POST_TRUFFLE" "$BEARER_TOKEN"
+./src/6-post-truffle.sh "$SKIP_TRUFFLE" "$SKIP_POST_TRUFFLE" "$BEARER_TOKEN" "$GITHUB_ORG"

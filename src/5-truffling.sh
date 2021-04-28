@@ -7,16 +7,16 @@ if ! $SKIP_TRUFFLE; then
     echo "Truffling"
 
     rm src/5-results.txt 2>/dev/null
-    mkdir -p src/truffle-results/ 2>/dev/null
-    rm src/truffle-results/*.txt 2>/dev/null
+    mkdir -p src/results/truffle-results/ 2>/dev/null
+    rm src/results/truffle-results/*.txt 2>/dev/null
     while read REPO_SSH; do
 
         REPO=$(echo $REPO_SSH | cut -d'/' -f2 | sed 's/.git$//g')
         pushd repos/$REPO > /dev/null
 
-            docker run --rm -v "$(pwd):/proj" dxa4481/trufflehog --regex --entropy=False file:///proj | sed -r "s/[[:cntrl:]]\[[0-9]{1,3}m//g" | egrep -i "^Reason:|^Filepath:|^Branch:|~~~~~~~~~~~~~~~~~~~~~|^Hash:" > ../../src/truffle-results/$REPO.txt
-            # truffleHog --regex --entropy=False ./ | sed -r "s/[[:cntrl:]]\[[0-9]{1,3}m//g" | egrep -i "^Reason:|^Filepath:|^Branch:|~~~~~~~~~~~~~~~~~~~~~|^Hash:" > ../../src/truffle-results/$REPO.txt
-            RESULTS=$(cat ../../src/truffle-results/$REPO.txt | grep -c "^Reason:")
+            docker run --rm -v "$(pwd):/proj" dxa4481/trufflehog --regex --entropy=False file:///proj | sed -r "s/[[:cntrl:]]\[[0-9]{1,3}m//g" | egrep -i "^Reason:|^Filepath:|^Branch:|~~~~~~~~~~~~~~~~~~~~~|^Hash:" > ../../src/results/truffle-results/$REPO.txt
+            # truffleHog --regex --entropy=False ./ | sed -r "s/[[:cntrl:]]\[[0-9]{1,3}m//g" | egrep -i "^Reason:|^Filepath:|^Branch:|~~~~~~~~~~~~~~~~~~~~~|^Hash:" > ../../src/results/truffle-results/$REPO.txt
+            RESULTS=$(cat ../../src/results/truffle-results/$REPO.txt | grep -c "^Reason:")
         popd > /dev/null
 
         echo "$RESULTS --> $REPO"
@@ -27,8 +27,8 @@ else
     echo "WARNING: Not running trufflehog. Will display previous results if they exist."
 fi
 
-if [ -d src/truffle-results/ ]; then
-    pushd src/truffle-results/ > /dev/null
+if [ -d src/results/truffle-results/ ]; then
+    pushd src/results/truffle-results/ > /dev/null
     echo -e "\nTRUFFLE REPORT \n\nCount of issues by type:\n"
     grep Reason * | awk -F'Reason: ' '{print $2}' | sort | uniq > truffle-result-types.txt
     grep Reason * | awk -F'Reason: ' '{print $2}' | sort | uniq -c
@@ -56,6 +56,6 @@ if [ -d src/truffle-results/ ]; then
 
     popd > /dev/null
 
-    echo -e "\nSummaries available in src/truffle-results/:\n"
-    wc -l src/truffle-results/SUMMARY*
+    echo -e "\nSummaries available in src/results/truffle-results/:\n"
+    wc -l src/results/truffle-results/SUMMARY*
 fi
