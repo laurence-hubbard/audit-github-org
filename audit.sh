@@ -33,10 +33,10 @@ if ! [ -z $REPO_LIST ]; then
     ./src/2-filter-repos.sh "$REPO_LIST"
 fi
 
-
 ./src/3-update-repos-track-authors.sh "$DATE_FILTER"
 ./src/4-get-unapproved-authors.sh "$APPROVAL_FILTER"
-
 ./src/5-truffling.sh "$SKIP_TRUFFLE" "$GITHUB_ORG"
 
 ./src/6-post-truffle.sh "$SKIP_TRUFFLE" "$SKIP_POST_TRUFFLE" "$BEARER_TOKEN" "$GITHUB_ORG"
+
+./src/7-interactive-find-live-aws-keys.sh "$BEARER_TOKEN" "$GITHUB_ORG"
